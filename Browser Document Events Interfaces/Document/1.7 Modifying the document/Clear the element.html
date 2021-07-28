@@ -1,0 +1,18 @@
+<ol id="elem">
+    <li>Hello</li>
+    <li>World</li>
+  </ol>
+  
+  <script>
+    function clear(id) { 
+        let elemento = document.querySelector(`#${id}`)
+
+        console.log(elemento)
+        while(elemento.hasChildNodes()) {
+            elemento.removeChild(elemento.firstChild)
+        }
+        
+    }
+  
+    clear('elem'); // clears the list
+  </script>
