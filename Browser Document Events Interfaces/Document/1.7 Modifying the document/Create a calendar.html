@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <main></main>
+
+    <script>
+        function createCalendar(element, year, month) {
+
+
+            createCalendarHTML(element, createCalendarArry(year, month))
+
+            function createCalendarArry(year, month) {
+
+                const
+                    calendarArry = [
+                        ['Mo', 'TU', 'WE', 'TH', 'FR', 'SA', 'SU'],
+                        []
+                    ],
+                    monthStart = new Date(year, month),
+                    monthEnd = new Date(year, month),
+                    dayWeek = monthStart.getDay();
+
+                let positionDay,
+                    positionWeek = 1;
+
+                monthEnd.setMonth(monthEnd.getMonth() + 1)
+
+                const monthDays = (monthEnd.getTime() - monthStart.getTime()) / 8.64e+7
+
+                switch (dayWeek) {
+                    case 0:
+                        positionDay = 6;
+                        break;
+                    default:
+                        positionDay = dayWeek - 1
+                }
+
+                // Create spaces in black in the cells before positionDay
+
+                for (let i = 0; i < positionDay; i++) {
+                    calendarArry[1][i] = ' '
+                }
+
+                // filling the arry with the days of month
+
+                for (let day = 1; day <= monthDays; day++) {
+
+                    calendarArry[positionWeek][positionDay] = day
+
+                    if (positionDay == 6) {
+
+                        calendarArry.push([]);
+                        positionDay = 0;
+                        positionWeek++
+                    } else {
+                        positionDay++
+                    }
+
+                }
+
+                return calendarArry
+
+            }
+
+            function createCalendarHTML(element, arry) {
+
+                const table = document.createElement('table')
+
+                arry.forEach((week, i) => {
+
+                    let row = document.createElement('tr')
+                    let cell = (i == 0) ? 'th' : 'td'
+
+                    week.forEach(day => {
+
+                        row.insertAdjacentHTML("beforeend", `<${cell}>${day}</${cell}>`)
+                    })
+
+                    table.append(row)
+                })
+
+                element.append(table)
+            }
+
+        }
+
+        const main = document.querySelector('main')
+
+        console.table(createCalendar(main, 2021, 11))
+    </script>
+
+
+</body>
+
+</html>
