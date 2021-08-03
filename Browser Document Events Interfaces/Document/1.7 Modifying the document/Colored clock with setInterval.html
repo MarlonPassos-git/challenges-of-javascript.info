@@ -74,11 +74,15 @@
         let active = setInterval(runningClock, 1000);
 
         function StartClock() {
-            active = setInterval(runningClock, 1000)
+
+            if (!active) active = setInterval(runningClock, 1000)
+
+            runningClock()
         }
 
         function StopClock() {
             clearInterval(active)
+            active = null
         }
 
       
