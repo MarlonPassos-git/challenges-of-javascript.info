@@ -26,6 +26,28 @@
       </p>
     </div>
   </div>
+  <script>
 
+    let list = document.querySelectorAll('.pane')
+
+    for (let element of list) {
+    
+    let button = document.createElement('button')
+
+    button.innerText = '[x]'
+
+    button.addEventListener('click',  function() {
+    
+        this.parentElement.hidden = true
+
+    })    
+    
+    element.append(button)
+
+
+    
+}
+    
+  </script>
 </body>
 </html>

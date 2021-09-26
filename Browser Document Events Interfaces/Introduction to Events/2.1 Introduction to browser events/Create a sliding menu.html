@@ -1,16 +1,64 @@
 <!DOCTYPE HTML>
 <html>
+
 <head>
   <meta charset="utf-8">
 </head>
+
 <body>
 
-  ▶ ▼ Sweeties (click me)!
-  <ul>
-    <li>Cake</li>
-    <li>Donut</li>
-    <li>Honey</li>
-  </ul>
+  <style>
+    button {
+      border: none;
+      background: none;
+      cursor: pointer;
+    }
+  </style>
 
+
+  <div class="sliding-menu">
+    <button class="sliding-menu__button">
+      <span class="sliding-menu__icon">▶</span> Sweeties (click me)!</button>
+    <ul class="sliding-menu__list" hidden>
+      <li>Cake</li>
+      <li>Donut</li>
+      <li>Honey</li>
+    </ul>
+  </div>
+
+  <script>
+    const menu = document.querySelector(".sliding-menu")
+
+    slidingMenu(menu)
+
+
+    function slidingMenu(element) {
+
+      const button = document.querySelector(".sliding-menu__button");
+      const list = document.querySelector(".sliding-menu__list");
+      const icon = document.querySelector(".sliding-menu__icon");
+
+      button.addEventListener("click", toggle)
+
+
+
+      function toggle() {
+
+        console.log(list.hidden)
+
+        if (list.hidden) {
+          list.hidden = false;
+          icon.innerHTML = '▼';
+        } else {
+          list.hidden = true;
+          icon.innerHTML = '▶'
+        }
+
+
+      }
+
+    }
+  </script>
 </body>
+
 </html>
