@@ -1,0 +1,106 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <style>
+        table {
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            border: 1px solid black;
+            padding: 4px;
+        }
+
+        th {
+            cursor: pointer;
+        }
+
+        th:hover {
+            background: yellow;
+        }
+    </style>
+</head>
+
+<body>
+
+    <table id="grid">
+        <thead>
+            <tr>
+                <th data-type="number">Age</th>
+                <th data-type="string">Name</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>5</td>
+                <td>John</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>Pete</td>
+            </tr>
+            <tr>
+                <td>12</td>
+                <td>Ann</td>
+            </tr>
+            <tr>
+                <td>9</td>
+                <td>Eugene</td>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>Ilya</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <script>
+        grid.addEventListener('click', function (e) {
+
+            let target = e.target.closest('[data-type]');
+
+            if (!target) return;
+            if (!this.contains(target)) return;
+
+            let nomes = []
+            let numeros = []
+            let tbody = grid.tBodies[0].rows
+            let tds = grid.tBodies[0].querySelectorAll('td')
+
+            Array.from(tbody).forEach((i) => {
+
+                numeros.push(+i.cells[0].innerText)
+                nomes.push(i.cells[1].innerText)
+
+            })
+
+            numeros.sort((a, b) => (a -b))
+            nomes.sort()
+
+            let lista = (target.dataset.type == "string") ? nomes : numeros
+
+            lista.forEach((i, index) => {
+
+                for (let td of tds) {
+
+                    if (td.innerText == i) {
+                        
+                        grid.tBodies[0].append(td.parentElement)
+                    }
+                }
+
+            })
+
+
+
+
+
+        })
+    </script>
+
+</body>
+
+</html>
